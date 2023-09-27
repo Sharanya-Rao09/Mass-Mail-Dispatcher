@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Send valid emails</title>
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Raleway:200,100,400"
+      rel="stylesheet"
+      type="text/css"
+    />
+  </head>
+
+  <body>
+    <p id="heading">
+      Mass Mail<br />
+      Dispatcher
+    </p>
+    <form method="post">
+      <label for="senderEmail">From :</label>
+      <input type="email" id="senderEmail" name="senderEmail" required />
+
+      <br /><br /><br />
+
+      <label
+        for="subject"
+        style="margin-top: -2em; z-index: 22; position: absolute"
+        >Subject:</label
+      >
+      <textarea id="subject" name="subject" required></textarea>
+
+      <br /><br /><br /><br />
+
+      <label for="csvFile">CSV File:</label>
+      <input type="file" id="csvFile" name="csvFile" accept=".csv" required />
+
+      <br /><br />
+
+      <label for="message">Message:</label>
+      <textarea id="message" name="message" required></textarea>
+
+      <br /><br />
+
+      <input
+        type="button"
+        value="Send Emails"
+        style="font-weight: bold"
+        onclick="sendEmails()"
+      />
+
+      <br />
+
+      <div style="display: flex">
+        <div>
+          <p style="color: #393e41">
+            Valid Emails: <span id="validEmailCount"></span>
+          </p>
+          <div id="validEmails" style="float: left"></div>
+        </div>
+        <div style="margin-left: 15px">
+          <p style="color: #393e41">
+            Invalid Emails: <span id="invalidEmailCount"></span>
+          </p>
+          <div id="invalidEmails" style="float: left"></div>
+        </div>
+      </div>
+    </form>
+
+    <script type="text/javascript">
+      (function () {
+        emailjs.init("nPbQxXJaUVkVPcHQS"); // For implementation from your system, replace with your emailJS user ID
+      })();
+
+      function sendEmails() {
+        var senderEmail = document.getElementById("senderEmail").value;
+        var message = document.getElementById("message").value;
+        var subject = document.getElementById("subject").value;
+
+        var validEmails = [];
+        var invalidEmails = [];
+
+        // Read contents of CSV file
+        var file = document.getElementById("csvFile").files[0];
+        var reader = new FileReader();
+        reader.readAsText(file);
+        reader.onload = function (event) {
+          var csv = event.target.result;
+          var lines = csv.split("\n");
+          for (var i = 0; i < lines.length; i++) {
+            var email = lines[i].trim();
+            var emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,3}$/;
+            if (emailRegex.test(email)) {
+              validEmails.push(email);
+            } else {
+              invalidEmails.push(email);
+            }
+          }
+
+          // Code to send email to valid email addresses from csv file
+          for (var j = 0; j < validEmails.length; j++) {
+            var templateParams = {
+              to_name: validEmails[j],
+              from_name: senderEmail,
+              message_html: message,
+              subject_html: subject,
+            };
+
+            // Code for implementation: replace your emailJS Service ID and Template ID.
+            emailjs
+              .send("service_m3fz4gr", "template_9esk4jg", templateParams)
+              .then(
+                function (response) {
+                  console.log("SUCCESS", response);
+                },
+                function (error) {
+                  console.log("FAILED", error);
+                }
+              );
+          }
+
+          alert("Emails sent to valid email addresses.");
+        };
+      }
+    </script>
+    <script type="text/javascript">
+      document
+        .getElementById("csvFile")
+        .addEventListener("change", function () {
+          var validEmails = [];
+          var invalidEmails = [];
+
+          // Code to read contents of CSV file
+          var file = document.getElementById("csvFile").files[0];
+          var reader = new FileReader();
+          reader.readAsText(file);
+          reader.onload = function (event) {
+            var csv = event.target.result;
+            var lines = csv.split("\n");
+            for (var i = 0; i < lines.length; i++) {
+              var email = lines[i].trim();
+              var emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,3}$/;
+              if (emailRegex.test(email)) {
+                validEmails.push(email);
+              } else {
+                invalidEmails.push(email);
+              }
+            }
+
+            // Displaying the valid and invalid emails to front-end
+            document.getElementById("validEmails").innerHTML =
+              validEmails.join("<br><br>");
+            document.getElementById("invalidEmails").innerHTML =
+              invalidEmails.join("<br><br>");
+            document.getElementById("validEmailCount").innerText =
+              "(" + validEmails.length + ")";
+            document.getElementById("invalidEmailCount").innerText =
+              "(" + invalidEmails.length + ")";
+          };
+        });
+    </script>
+  </body>
+</html>
