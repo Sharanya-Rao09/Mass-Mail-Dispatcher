@@ -1,0 +1,169 @@
+/* Set default font family, background color, and text color */
+body {
+  background-color: #d5f4e6;
+  font-family: cursive;
+  background-size: cover;
+  position: relative;
+  color: #333;
+  overflow-y: hidden;
+  z-index: 2;
+}
+
+/* Center the main heading and add margin at the top */
+#heading {
+  color: #618685;
+  margin-left: 4em;
+  font-family: Lucida Handwriting;
+  font-size: 4em;
+  font-weight: normal;
+  position: fixed;
+  margin-top: 4em;
+}
+
+/* Style the form container */
+form {
+  max-width: 600px;
+  margin-left: 52em;
+  margin-top: 1em;
+  /* From https://css.glass */
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(2.7px);
+  -webkit-backdrop-filter: blur(2.7px);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  padding: 20px;
+  /* border-radius: 10px; */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+/* Style form labels */
+label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: bold;
+  color: #575761;
+}
+
+/* Style text inputs and text areas */
+input[type="email"],
+textarea {
+  width: 95%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #767a7d;
+  border-radius: 5px;
+  font-size: 16px;
+  color: #766f6f;
+  background: rgba(187, 179, 179, 0.1);
+}
+
+/* Style text inputs and text areas */
+#subject {
+  width: 89%;
+  padding: 10px;
+  margin-bottom: -1em;
+  border: 1px solid #767a7d;
+  border-radius: 5px;
+  font-size: 16px;
+  color: #766f6f;
+  z-index: 22;
+  position: absolute;
+
+  background: rgba(187, 179, 179, 0.1);
+}
+
+/* Style file input */
+input[type="file"] {
+  margin-bottom: 12px;
+  color: #393e41;
+}
+
+/* Style form submit button */
+input[type="button"] {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: #c5c3c6;
+
+  border: none;
+  border-radius: 5px;
+  color: #393e41;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+/* Style container for valid and invalid emails */
+#validEmails {
+  margin-top: 1px;
+}
+#invalidEmails {
+  margin-top: 1px;
+}
+
+/* Style paragraphs within container for valid and invalid emails */
+#validEmails p,
+#invalidEmails p {
+  font-weight: bold;
+  color: #393e41;
+}
+
+/* Style divs within container for valid and invalid emails */
+#validEmails div {
+  color: #393e41;
+}
+
+#invalidEmails div {
+  color: #393e41;
+}
+
+#message {
+  color: #393e41;
+}
+#senderEmail {
+  color: #393e41;
+}
+
+/* Style text inputs and text areas */
+input[type="email"]:focus,
+textarea:focus {
+  outline: none !important;
+  border-color: #393d40;
+}
+#validEmails,
+#invalidEmails {
+  height: 150px;
+  overflow: auto;
+}
+
+.img1 {
+  height: 250px;
+  margin-top: -15em;
+  position: fixed;
+}
+
+.img2 {
+  height: 200px;
+  margin-top: -23em;
+  position: absolute;
+  margin-left: 13.3em;
+}
+
+h1,
+h2 {
+  font-weight: 200;
+  margin: 0.4em 0;
+  z-index: 12;
+  position: absolute;
+  margin-top: 23em;
+  margin-left: 14em;
+}
+h1 {
+  font-size: 18px;
+}
+h2 {
+  color: #888;
+  font-size: 18px;
+}
